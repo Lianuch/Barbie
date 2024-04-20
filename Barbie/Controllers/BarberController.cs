@@ -36,14 +36,21 @@ namespace Barbie.Controllers
             return Ok(GetAllBarbers());
         }
 
-        [HttpPost("AddBarber")]
-        public async Task<IActionResult> AddAdmin(Barber barber)
+        [HttpPost]
+        public async Task<IActionResult> AddBarber(Barber barber)
         {
             context.Barbers.Add(barber);
             
             await context.SaveChangesAsync();
             return Ok(GetAllBarbers());
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteBarber(Barber barber)
+        {
+            return Ok();
+        }
+
 
   
     }
