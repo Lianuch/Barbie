@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Barbie")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+531eed42f839db558ed7962e585f028a332f5a6e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e282104890cd6c99b1256f3c814eef79b6f9e261")]
 [assembly: System.Reflection.AssemblyProductAttribute("Barbie")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Barbie")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
