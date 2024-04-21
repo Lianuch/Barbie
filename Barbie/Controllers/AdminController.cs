@@ -46,6 +46,17 @@ namespace Barbie.Controllers
             return Ok(GetAllAdmins());
         }
         
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAdmin(int id)
+        {
+            var admin = await context.Admins.FindAsync(id);
+            if (admin == null)
+                return NotFound("Admin not found");
+
+            context.Admins.Remove(admin);
+            await context.SaveChangesAsync();
+            return Ok(GetAllAdmins());
+        }
     
         
     }

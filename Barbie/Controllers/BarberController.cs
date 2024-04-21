@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Barbie.Data;
+using Barbie.Dtos;
+using Barbie.Mappers;
 using Barbie.Models;
 
 namespace Barbie.Controllers
@@ -19,20 +22,36 @@ namespace Barbie.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllBarbers()
+        /*public async Task<IActionResult> GetAllBarbers()
         {
             var barbers = await context.Barbers.ToListAsync();
-            await context.SaveChangesAsync();
+            return Ok(barbers);
+        }  */
+        //testing
+        public async Task<IActionResult> GetAllBarbers()
+        {
+            var barbers = await context.Barbers
+                .Select(b => new BarberDto()
+                {
+                    BarberClass = b.BarberClass,
+                    BarberIncome = b.BarberIncome,
+                    Records = b.Records,
+                    Reviews = b.Reviews,
+                    UserId = b.UserId
+                })
+                .ToListAsync();
+
             return Ok(barbers);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetBarber(int id)
+        public async Task<IActionResult> GetBarber([FromBody]int id)
         {
             var barber = await context.Barbers.FindAsync(id);
             if(barber == null)
                 return NotFound("Barber not found");
-            
+            await context.SaveChangesAsync();
+
             return Ok(GetAllBarbers());
         }
 
@@ -45,10 +64,16 @@ namespace Barbie.Controllers
             return Ok(GetAllBarbers());
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteBarber(Barber barber)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteBarber(int id)
         {
-            return Ok();
+            var barber = await context.Barbers.FindAsync(id);
+            if (barber == null)
+                return NotFound("Barber not found");
+
+            context.Barbers.Remove(barber);
+            await context.SaveChangesAsync();
+            return Ok(GetAllBarbers());
         }
 
 
