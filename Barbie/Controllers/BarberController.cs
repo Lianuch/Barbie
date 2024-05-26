@@ -1,82 +1,48 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Barbie.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using Barbie.Dtos;
-using Barbie.Mappers;
-using Barbie.Models;
+using Barbie.Interfaces;
 
 namespace Barbie.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
     public class BarberController : ControllerBase
     {
-        private readonly DataContext context;
+        private readonly IBarberService _barberService;
 
-
-        public BarberController(DataContext context)
+        public BarberController(IBarberService barberService)
         {
-            this.context = context;
+            _barberService = barberService;
         }
 
         [HttpGet]
-        /*public async Task<IActionResult> GetAllBarbers()
-        {
-            var barbers = await context.Barbers.ToListAsync();
-            return Ok(barbers);
-        }  */
-        //testing
         public async Task<IActionResult> GetAllBarbers()
         {
-            var barbers = await context.Barbers
-                .Select(b => new BarberDto()
-                {
-                    BarberClass = b.BarberClass,
-                    BarberIncome = b.BarberIncome,
-                    Records = b.Records,
-                    Reviews = b.Reviews,
-                    UserId = b.UserId
-                })
-                .ToListAsync();
-
+            var barbers = await _barberService.GetAll();
+            
             return Ok(barbers);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetBarber([FromBody]int id)
+        [HttpGet("{id:guid}")]
+        public async Task<IActionResult> GetBarber([FromRoute]Guid id)
         {
-            var barber = await context.Barbers.FindAsync(id);
-            if(barber == null)
-                return NotFound("Barber not found");
-            await context.SaveChangesAsync();
-
-            return Ok(GetAllBarbers());
+            var barber = await _barberService.Get(id);
+            
+            return Ok(barber);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBarber(Barber barber)
+        public async Task<IActionResult> AddBarber([FromBody] BarberCreateDto barber)
         {
-            context.Barbers.Add(barber);
+            await _barberService.Create(barber);
             
-            await context.SaveChangesAsync();
-            return Ok(GetAllBarbers());
+            return Ok();
         }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBarber(int id)
+        [HttpDelete]
+        public async Task<IActionResult> Delete(Guid barber)
         {
-            var barber = await context.Barbers.FindAsync(id);
-            if (barber == null)
-                return NotFound("Barber not found");
-
-            context.Barbers.Remove(barber);
-            await context.SaveChangesAsync();
-            return Ok(GetAllBarbers());
+            var barbers = await _barberService.Delete(barber);
+            return Ok(barbers);
         }
-
-
-  
     }
 }

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "8YOQjTOskPYCZs1DAe1b1aDLtvRYp3ugwkMrVbA3TBSWh3MaZJTm+bUCkRcBDmXxXj2W7yp72plApJSpCCugpw==",
+  "dgSpecHash": "jG9W1RW/TPFHS0ajxISHwhNtGRVnXyA+PgJtG2MnR8j7Wra7DgAMihQF9Sf7bzGSt9Unulwmd85aBbfPUSrZfg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Andrew\\Desktop\\Barbershop\\Barbie\\Barbie.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Andrew\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Andrew\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Andrew\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
     "C:\\Users\\Andrew\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
