@@ -559,3 +559,4 @@ C:\Users\Andrew\Desktop\Barbershop\Barbie\obj\Debug\net8.0\refint\Barbie.dll
 C:\Users\Andrew\Desktop\Barbershop\Barbie\obj\Debug\net8.0\Barbie.pdb
 C:\Users\Andrew\Desktop\Barbershop\Barbie\obj\Debug\net8.0\Barbie.genruntimeconfig.cache
 C:\Users\Andrew\Desktop\Barbershop\Barbie\obj\Debug\net8.0\ref\Barbie.dll
+C:\Users\Andrew\Desktop\Barbershop\Barbie\bin\Debug\net8.0\AutoMapper.dll

@@ -14,6 +14,7 @@ public class BarberConfigurations : IEntityTypeConfiguration<Barber>
         builder
             .HasOne(u => u.User)
             .WithOne(b => b.Barber)
-            .HasForeignKey<Barber>(u => u.UserId);
+            .HasForeignKey<Barber>(u => u.UserId)
+            .OnDelete(DeleteBehavior.SetNull);
     }
 }
