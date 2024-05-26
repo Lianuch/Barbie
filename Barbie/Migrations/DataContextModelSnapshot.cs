@@ -59,13 +59,14 @@ namespace Barbie.Migrations
                     b.Property<float>("BarberIncome")
                         .HasColumnType("real");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Barbers");
                 });
@@ -255,6 +256,9 @@ namespace Barbie.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("BarbershopId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -262,6 +266,8 @@ namespace Barbie.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BarbershopId");
 
                     b.ToTable("Users");
                 });
@@ -282,8 +288,7 @@ namespace Barbie.Migrations
                     b.HasOne("Barbie.Models.User", "User")
                         .WithOne("Barber")
                         .HasForeignKey("Barbie.Models.Barber", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("User");
                 });
@@ -410,6 +415,15 @@ namespace Barbie.Migrations
                     b.Navigation("Client");
                 });
 
+            modelBuilder.Entity("Barbie.Models.User", b =>
+                {
+                    b.HasOne("Barbie.Models.Barbershop", "Barbershop")
+                        .WithMany("Users")
+                        .HasForeignKey("BarbershopId");
+
+                    b.Navigation("Barbershop");
+                });
+
             modelBuilder.Entity("Barbie.Models.Admin", b =>
                 {
                     b.Navigation("Records");
@@ -434,6 +448,8 @@ namespace Barbie.Migrations
 
                     b.Navigation("Location")
                         .IsRequired();
+
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("Barbie.Models.Client", b =>

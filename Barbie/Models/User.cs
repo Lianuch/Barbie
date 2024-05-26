@@ -11,8 +11,8 @@ public class User
     public Barber? Barber{ get; set; }
 
 
-    public Guid BarbershopId { get; set; }
-    public Barbershop Barbershop { get; set; }
+    public Guid? BarbershopId { get; set; }
+    public Barbershop? Barbershop { get; set; }
 
  
 }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Barbie.Data;
-using Barbie.Mappers;
 using Barbie.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 
